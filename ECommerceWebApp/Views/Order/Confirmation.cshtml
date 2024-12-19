@@ -1,0 +1,17 @@
+﻿@model ECommerceWebApp.Models.Order
+
+<div class="container mt-5">
+    <h2 class="text-center">Order Confirmation</h2>
+    <p class="text-muted">Thank you for your order, @User.Identity.Name!</p>
+
+    <h4>Order Summary</h4>
+    <ul>
+        @foreach (var item in Model.OrderItems)
+        {
+            <li>@item.Product.Name - @item.Quantity x @item.Product.Price.ToString("C")</li>
+        }
+    </ul>
+    <p><strong>Total:</strong> @Model.OrderItems.Sum(oi => oi.Quantity * oi.Product.Price).ToString("C")</p>
+
+    <a href="/" class="btn btn-primary mt-3">Back to Home</a>
+</div>

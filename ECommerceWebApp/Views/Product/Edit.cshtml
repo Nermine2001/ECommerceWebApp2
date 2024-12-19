@@ -1,0 +1,290 @@
+﻿@model ECommerceWebApp.Models.Product
+<style>
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+	}
+
+	body {
+		margin: 0;
+		font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+		background: /*#3b4465*/ linear-gradient(#48ca6e, #00ac88);
+		justify-content: center;
+		align-items: center;
+		min-height: 150vh;
+	}
+
+	.forms-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 200px;
+		padding: 0 15px;
+	}
+
+	.section-title {
+		font-size: 32px;
+		letter-spacing: 1px;
+		color: #fff;
+	}
+
+	.form-box {
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			max-width: 600px;
+			width: 100%;
+			padding: 20px;
+	}
+
+	.forms {
+		display: flex;
+		align-items: flex-start;
+		margin-top: 30px;
+	}
+
+	.form-wrapper {
+		animation: hideLayer .3s ease-out forwards;
+	}
+
+	.form-wrapper.is-active {
+		width: 100%;
+		animation: showLayer .3s ease-in forwards;
+	}
+
+
+
+	.switcher {
+		position: relative;
+		cursor: pointer;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		padding: 0;
+		text-transform: uppercase;
+		font-family: inherit;
+		font-size: 16px;
+		letter-spacing: .5px;
+		color: #999;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		transform: translateX(0);
+		transition: all .3s ease-out;
+	}
+
+	.form-wrapper.is-active .switcher-login {
+		color: #fff;
+		transform: translateX(90px);
+	}
+
+	.form-wrapper.is-active .switcher-signup {
+		color: #fff;
+		transform: translateX(-90px);
+	}
+
+	.underline {
+		position: absolute;
+		bottom: -5px;
+		left: 0;
+		overflow: hidden;
+		pointer-events: none;
+		width: 100%;
+		height: 2px;
+	}
+
+	.underline::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: inherit;
+		display: block;
+		width: inherit;
+		height: inherit;
+		background-color: currentColor;
+		transition: transform .2s ease-out;
+	}
+
+	.switcher-login .underline::before {
+		transform: translateX(101%);
+	}
+
+	.switcher-signup .underline::before {
+		transform: translateX(-101%);
+	}
+
+	.form-wrapper.is-active .underline::before {
+		transform: translateX(0);
+	}
+
+	.form {
+		overflow: hidden;
+		min-width: 260px;
+		margin-top: 50px;
+		padding: 30px 25px;
+	  border-radius: 5px;
+		transform-origin: top;
+	}
+
+	.form-login {
+		animation: hideLogin .3s ease-out forwards;
+	}
+
+	.form-wrapper.is-active .form-login {
+		animation: showLogin .3s ease-in forwards;
+	}
+
+
+
+
+
+	.form-signup {
+		animation: hideSignup .3s ease-out forwards;
+	}
+
+	.form-wrapper.is-active .form-signup {
+		animation: showSignup .3s ease-in forwards;
+	}
+
+
+
+	.form fieldset {
+		position: relative;
+		opacity: 0;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		transition: all .3s ease-out;
+	}
+
+	.form-login fieldset {
+		transform: translateX(-50%);
+	}
+
+	.form-signup fieldset {
+		transform: translateX(50%);
+	}
+
+	.form-wrapper.is-active fieldset {
+		opacity: 1;
+		transform: translateX(0);
+		transition: opacity .4s ease-in, transform .35s ease-in;
+	}
+
+	.form legend {
+		position: absolute;
+		overflow: hidden;
+		width: 1px;
+		height: 1px;
+		clip: rect(0 0 0 0);
+	}
+
+	.input-block {
+		margin-bottom: 20px;
+	}
+
+	.input-block label {
+		font-size: 14px;
+		color: #a1b4b4;
+	}
+
+	.input-block input {
+		display: block;
+		width: 100%;
+		margin-top: 8px;
+		padding-right:15px;
+		padding-left: 15px;
+		font-size: 16px;
+		line-height: 40px;
+		color: #3b4465;
+	  background: #eef9fe;
+	  border: 1px solid #cddbef;
+	  border-radius: 4px;
+	}
+
+	.form [type='submit'] {
+		opacity: 0;
+		display: block;
+		min-width: 120px;
+		margin: 30px auto 10px;
+		font-size: 18px;
+		line-height: 40px;
+		border-radius: 25px;
+		border: none;
+		transition: all .3s ease-out;
+	}
+
+	.form-wrapper.is-active .form [type='submit'] {
+		opacity: 1;
+		transform: translateX(0);
+		transition: all .4s ease-in;
+	}
+
+	.btn-login {
+		color: #fbfdff;
+		background: #a7e245;
+		transform: translateX(-30%);
+	}
+
+	.btn-signup {
+		color: #fbfdff;
+		background: #a7e245;
+			padding: 12px 25px; /* Increased padding for a larger button */
+			font-size: 18px; /* Increased font size */
+			border-radius: 25px;
+			margin-top: 20px; /* Added spacing above */
+			width: 100%; /* Full-width button */
+			text-align: center;
+		box-shadow: inset 0 0 0 2px #a7e245;
+		transform: translateX(30%);
+	}
+
+</style>
+
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" type="number" step="0.01" />
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <div>
+        <label asp-for="Category"></label>
+        <input asp-for="Category" />
+        <span asp-validation-for="Category"></span>
+    </div>
+
+    <div>
+        <label asp-for="ImageURL"></label>
+        <input asp-for="ImageURL" />
+        <span asp-validation-for="ImageURL"></span>
+    </div>
+
+    <div>
+        <label asp-for="IsFeatured"></label>
+        <input asp-for="IsFeatured" type="checkbox" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>

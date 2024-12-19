@@ -1,0 +1,42 @@
+﻿@model ECommerceWebApp.Models.Product
+
+<h2>Create Product</h2>
+
+<form asp-action="Create" asp-controller="Product" method="post">
+    <div>
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" type="number" step="0.01" />
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <div>
+        <label asp-for="Category"></label>
+        <input asp-for="Category" />
+        <span asp-validation-for="Category"></span>
+    </div>
+
+    <div>
+        <label asp-for="ImageURL"></label>
+        <input asp-for="ImageURL" />
+        <span asp-validation-for="ImageURL"></span>
+    </div>
+
+    <div>
+        <label asp-for="IsFeatured"></label>
+        <input asp-for="IsFeatured" type="checkbox" />
+    </div>
+
+    <button type="submit">Create</button>
+</form>
